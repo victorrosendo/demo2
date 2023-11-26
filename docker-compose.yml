@@ -14,18 +14,26 @@ services:
     restart: always
 
   oracle-db:
-    image: gvenzl/oracle-xe
+    image: gvenzl/oracle-xe:latest
     ports:
       - "1521:1521"
     environment:
+      - ORACLE_RANDOM_PASSWORD=true
+      - APP_USER=prueba
+      - APP_USER_PASSWORD=prueba
       #- ORACLE_PDB=prueba
-      - ORACLE_PASSWORD=prueba
+    #  - ORACLE_PASSWORD=prueba
       #- ORACLE_PWD=prueba
-      - ORACLE_CHARACTERSET=AL32UTF8
+     # - ORACLE_CHARACTERSET=AL32UTF8
       #- ORACLE_EDITION=XE  # Oracle Edition (EE for Enterprise Edition)
-    volumes:
-      - oracle_data:/opt/oracle/oradata  # Persistencia de datos entre reinicios del contenedor
+    #volumes:
+     # - oracle_data:/opt/oracle/oradata  # Persistencia de datos entre reinicios del contenedor
 
-volumes:
-  oracle_data:
-    driver: local
+    #options: >-
+     #   --health-cmd healthcheck.sh
+      #  --health-interval 10s
+       # --health-timeout 5s
+        #--health-retries 10
+#volumes:
+ # oracle_data:
+  #  driver: local
